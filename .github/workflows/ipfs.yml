@@ -1,0 +1,21 @@
+name: Deploy to IPFS via Pinata
+
+on:
+  push:
+    branches:
+      - main  # Runs automatically every time you update your code
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pin to IPFS
+        uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
+        with:
+          pin-name: 'My Hobby Site Portfolio'
+          path: './' # Pins the root folder containing your index.html
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_SECRET_API_KEY }}
